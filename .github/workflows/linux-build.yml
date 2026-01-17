@@ -1,4 +1,4 @@
-name: Windows build
+name: Linux build
 
 on:
   push:
@@ -12,7 +12,7 @@ env:
   
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -22,15 +22,6 @@ jobs:
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}} --target ${{env.TARGET}}
-
-    #- name: Archive Artifacts
-    #  run: Compress-Archive -Path build/bin/* -DestinationPath ${{env.TARGET}}-${{env.BUILD_TYPE}}.zip
-
-    #- name: Upload Artifacts 
-     # uses: actions/upload-artifact@v4
-     # with:
-     #     name: ${{env.TARGET}}-${{env.BUILD_TYPE}}
-     #     path: ${{env.TARGET}}-${{env.BUILD_TYPE}}.zip
     
     
     
