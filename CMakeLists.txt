@@ -41,6 +41,11 @@ add_executable(${PROJECT_NAME}TestRunner Source/Tests/main.cpp)     #placeholder
 target_compile_definitions(${PROJECT_NAME}Lib PRIVATE _EXPORTING)       #for DLL export in header files
 target_compile_definitions(${PROJECT_NAME} PUBLIC _IMPORTING)
 
+option(SKIP_GAME_OPTION "Skip game" OFF) #this can use in GUI - thats just for educational purpose
+if(SKIP_GAME_OPTION)
+    message("Skip game is On")
+endif()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}Lib) #linking source code to dynamic library 
 target_link_libraries(${PROJECT_NAME}Lib PRIVATE MathLib) #linking dynamic library code to static library 
 target_link_libraries(${PROJECT_NAME}TestRunner PRIVATE MathLib) #linking tests code to static library 
