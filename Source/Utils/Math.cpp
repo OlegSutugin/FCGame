@@ -10,3 +10,8 @@ int RandomInt(int min, int max)
 
     return dist(gen);
 }
+
+int max(int x, int y)
+{
+    return (x >= y) ? x : y;
+}

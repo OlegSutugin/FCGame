@@ -68,19 +68,20 @@ def run_command(command):
     return result.returncode == 0
 
 def generate_project_files():
-    if not os.path.exists(Config.BUILD_FOLDER):
-        os.makedirs(Config.BUILD_FOLDER)
-        print(f"Created {Config.BUILD_FOLDER} folder.")
+    remove_build_folder()
+   # if not os.path.exists(Config.BUILD_FOLDER):
+    os.makedirs(Config.BUILD_FOLDER)
+    print(f"Created {Config.BUILD_FOLDER} folder.")
 
-        os.chdir(Config.BUILD_FOLDER)
-        command = get_cmake_command(Action.GENERATE)
-        print(f"Generated project files with command: {command}")
+    os.chdir(Config.BUILD_FOLDER)
+    command = get_cmake_command(Action.GENERATE)
+    print(f"Generated project files with command: {command}")
 
-        if run_command(command):
-            print("Project files generated succesfully.")
-        else:
-            print("Failed to generate project files.")
-        os.chdir("..")
+    if run_command(command):
+        print("Project files generated succesfully.")
+    else:
+        print("Failed to generate project files.")
+    os.chdir("..")
 
 def build_project(configuration = Confuguration.Release):
     if not os.path.exists(Config.BUILD_FOLDER):
