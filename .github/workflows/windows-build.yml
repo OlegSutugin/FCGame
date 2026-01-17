@@ -8,7 +8,7 @@ on:
 
 env:
   BUILD_TYPE: Release
-  TARGET: FCGame
+  TARGET: FightClubGame
   
 jobs:
   build:
