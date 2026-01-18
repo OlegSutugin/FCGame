@@ -1,18 +1,29 @@
-#include <cassert>
+//#include <cassert>
 #include "Utils/Math.h"
 #include "Game/Character.h"
+#include <iostream>
+#include<gtest/gtest.h>
 
-int main()
+TEST(Math, MaxShouldBeCalculatedCorrectly)
 {
-    assert(max(3,0) == 3);
-    assert(max(-3,0) == 0);
+    ASSERT_TRUE(max(3,0) == 3);
+    ASSERT_TRUE(max(-3,0) == 0);
+}
 
+TEST(Character, CharacterCanBeKilled) 
+{
     Character hero1("first test hero");
-    assert(!hero1.IsCharacterDead());
+    ASSERT_TRUE(!hero1.IsCharacterDead());
     hero1.TakeDamage(20);
-    assert(!hero1.IsCharacterDead());
+    ASSERT_TRUE(!hero1.IsCharacterDead());
     hero1.TakeDamage(200);
-    assert(hero1.IsCharacterDead());
+    ASSERT_TRUE(hero1.IsCharacterDead());
+}
 
-    return 0;
+int main(int argc, char** argv)
+{
+    testing::InitGoogleTest(&argc, argv);
+    const auto status = RUN_ALL_TESTS();
+    std::cin.get();
+    return status;
 }

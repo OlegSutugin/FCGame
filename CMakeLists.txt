@@ -32,11 +32,19 @@ source_group("Source files/Game" FILES "Source/Utils/Weapon.cpp" "Source/Utils/C
 source_group("Header files/Game" FILES "Source/Utils/Weapon.h" "Source/Utils/Character.h")
 
 
+#conan libraries find
+find_package(nlohmann_json REQUIRED) #in output log when "conan install . --output-folder=build" or in library page on conan site
+find_package(GTest REQUIRED)
+find_package(cpr)
+
+
 #targets
 add_executable(${PROJECT_NAME} ${SOURCES})
 add_library(MathLib STATIC ${MATH_SOURCES} ${MATH_INCLUDES}) #adding static library
 add_library(${PROJECT_NAME}Lib SHARED ${DLL_GAME_SOURCES} ${DLL_GAME_INCLUDES}) #adding dynamic library
 add_executable(${PROJECT_NAME}TestRunner Source/Tests/main.cpp)     #placeholder for autotests
+
+add_executable(ChuckNorrisJokes Source/ChuckNorrisJokes/main.cpp)
 
 target_compile_definitions(${PROJECT_NAME}Lib PRIVATE _EXPORTING)       #for DLL export in header files
 target_compile_definitions(${PROJECT_NAME} PUBLIC _IMPORTING)
@@ -46,10 +54,15 @@ if(SKIP_GAME_OPTION)
     message("Skip game is On")
 endif()
 
+
+#link libraries
 target_link_libraries(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}Lib) #linking source code to dynamic library 
 target_link_libraries(${PROJECT_NAME}Lib PRIVATE MathLib) #linking dynamic library code to static library 
 target_link_libraries(${PROJECT_NAME}TestRunner PRIVATE MathLib) #linking tests code to static library 
 target_link_libraries(${PROJECT_NAME}TestRunner PRIVATE ${PROJECT_NAME}Lib) #linking tests code to dynamic library 
+target_link_libraries(ChuckNorrisJokes nlohmann_json::nlohmann_json) #in output log when "conan install . --output-folder=build" --profile=conanProfileDebug --profile:b=conanProfileDebug (Release)   or in library page on conan site
+target_link_libraries(${PROJECT_NAME}TestRunner PRIVATE gtest::gtest)
+target_link_libraries(ChuckNorrisJokes cpr::cpr)
 
 
 #includes in IDE
