@@ -13,4 +13,5 @@
 #endif
 
 MATH_API int RandomInt(int min, int max);
+MATH_API float RandomFloat(float min, float max);
 MATH_API int max(int x, int y);
