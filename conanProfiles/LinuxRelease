@@ -6,3 +6,7 @@ compiler=gcc
 compiler.cppstd=20
 compiler.version=11
 compiler.libcxx=libstdc++11
+
+[conf]
+tools.system.package_manager:mode=install
+tools.system.package_manager:sudo=True
