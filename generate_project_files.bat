@@ -1,2 +1,2 @@
-conan install . --output-folder=build --profile=conanProfileDebug --profile:b=conanProfileDebug --build=missing
-Automation/build.bat generate
+call Automation/build.bat generate Debug
+call Automation/build.bat generate Release

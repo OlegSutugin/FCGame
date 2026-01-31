@@ -1,14 +1,18 @@
 #general information 
 cmake_minimum_required(VERSION 3.31)
+
+message("--- Project files generation for ${PROJECT_NAME} ---")
+include(${CMAKE_CURRENT_SOURCE_DIR}/Automation/CMAKE/CMakeHelpers.cmake)
+setup_conan()
+
 set(PROJECT_NAME CMakeLearning)
 project(${PROJECT_NAME} VERSION 1.0.0)
-message("--- Project files generation for ${PROJECT_NAME} ---")
+set(STARTUP_PROJECT_NAME FightClubGame)
 
 
 #Common options
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) #executable file in that directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin) #libraries to that directory too
-set(STARTUP_PROJECT_NAME FightClubGame)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT ${STARTUP_PROJECT_NAME}) #making startup project in IDE delete all artifactws before that
 set_property(GLOBAL PROPERTY USE_FOLDERS On)   #making all cmake projects in one folder in IDE if OFF (==FALSE)
 set(CMAKE_SUPPRESS_REGENERATION  TRUE)  #deleting ZERO_CHECK project in IDE
@@ -27,7 +31,7 @@ set(CMAKE_CXX_STANDARD 20)
 #conan libraries find
 find_package(nlohmann_json REQUIRED) #in output log when "conan install . --output-folder=build" or in library page on conan site
 find_package(GTest REQUIRED)
-find_package(cpr)
+#find_package(cpr)
 find_package(raylib)
 
 
@@ -47,6 +51,6 @@ add_subdirectory(Source/Utils) #inner cmakelists
 add_subdirectory(Source/FightClubGame) #inner cmakelists
 add_subdirectory(Source/DoodleJumpGame) #inner cmakelists
 
-include(${CMAKE_CURRENT_SOURCE_DIR}/Automation/CMAKE/CMakeHelpers.cmake)
+
 system_info()
 
