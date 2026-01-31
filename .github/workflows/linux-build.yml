@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
         configuration:
-          -Release
-          -Debug
+          - Release
+          - Debug
 
     steps:
     - uses: actions/checkout@v4
